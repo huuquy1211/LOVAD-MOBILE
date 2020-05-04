@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    mc:Ignorable="d"
+             x:Class="LOVAD_Xamarin.View.PlaceUserView">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation DurationIn="400" DurationOut="300" EasingIn="SinOut" EasingOut="SinIn" HasBackgroundAnimation="True" PositionIn="Center" PositionOut="Center" ScaleIn="1.2" ScaleOut="0.8"/>
+    </pages:PopupPage.Animation>
+
+    
+    <Grid HorizontalOptions="Fill" VerticalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="grdListPlace" Grid.Row="0" IsVisible="True">
+            <StackLayout Padding="5" Spacing="5" >
+                <Frame OutlineColor="Aqua" CornerRadius="10" Margin="5">
+                    <StackLayout>
+                        <ListView x:Name="ListDataPlaceUser" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorColor="Black" BackgroundColor="White">
+                            <ListView.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <BoxView Grid.Row="0" HeightRequest="1" BackgroundColor="#5D82C9" Margin="0,10,0,10"/>
+
+                                    <Label Grid.Row="1" FontSize="Title" FontAttributes="Bold" Text="DANH SÁCH CƠ SỞ" TextColor="#3399FF" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    <BoxView Grid.Row="2"
+                             HeightRequest="1"
+                             BackgroundColor="#5D82C9"
+                             Margin="0,10,0,10"/>
+
+                                </Grid>
+                            </ListView.Header>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Frame OutlineColor="Aqua" Margin="5" CornerRadius="5" BackgroundColor="White">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Grid.Row="0" Grid.Column="0" Margin="0" Text="Tên cơ sở:" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                                <Label x:Name="lblNamePlace" Grid.Row="0" Grid.Column="1" Margin="0" Text="{Binding Name}" FontSize="Large" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+
+                                                <Label Grid.Row="1" Grid.Column="0" Margin="0" Text="Địa chỉ:" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                                <Label x:Name="lblAddress" Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding Address}" FontSize="Large" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+
+                                                <Label Grid.Row="2" Grid.Column="0" Margin="0" Text="Địa chỉ IP:" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                                <Label x:Name="lblIPAddress" Grid.Row="2" Grid.Column="1" Margin="0" Text="{Binding PortAPI}" FontSize="Large" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                                <Grid Grid.Row="3" Grid.ColumnSpan="2">
+                                                    <Button x:Name="btnDelPlaceOfUser" HorizontalOptions="Fill" BackgroundColor="White" VerticalOptions="Center" CommandParameter="{Binding Id}" Clicked="btnDelPlaceOfUser_Clicked">
+                                                        <Button.Image>
+                                                            <OnPlatform x:TypeArguments="FileImageSource" Android="recycle.png" iOS="recycle.png"/>
+                                                        </Button.Image>
+                                                    </Button>
+                                                </Grid>
+                                            </Grid>
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Button x:Name="btnAddPlace" Text="Thêm cơ sở" Clicked="btnAddPlace_Clicked"/>
+                        <Button x:Name="btnCancel" Text="Đóng" Clicked="btnCancel_Clicked"/>
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+        </Grid>
+
+        <Grid x:Name="grdAddPlaceForUser" Grid.Row="1" IsVisible="False">
+            <StackLayout>
+                <Frame OutlineColor="Aqua" CornerRadius="10" Margin="5">
+                    <StackLayout>
+                        <Grid HorizontalOptions="Fill" VerticalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                               
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="THÊM CƠ SỞ CHO TÀI KHOẢN" FontAttributes="Bold" FontSize="Title" TextColor="#2196F3" VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                <Image Grid.Row="1" Grid.Column="0" Source="user.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Entry x:Name="txtUserName" TextChanged="txtUserName_TextChanged" Grid.Row="1" Grid.Column="1" IsReadOnly="True" Margin="0" Text="{Binding UserName}" Placeholder="Tài khoản" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                <Label Grid.Row="2" Grid.Column="1" x:Name="tblUserName" IsVisible="False" Text="Vui lòng nhập tài khoản!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                                <Image Grid.Row="3" Grid.Column="0" Source="place.png" VerticalOptions="Start" HorizontalOptions="Center"/>
+                                <Button Grid.Row="3" Grid.Column="1" x:Name="btnSelectPlace" Clicked="btnSelectPlace_Clicked" Text="-- Chọn cơ sở --" FontAttributes="Bold" TextColor="Red" FontSize="Medium" BackgroundColor="White" BorderWidth="1" BorderColor="Aqua"/>
+
+                                <Grid Grid.Row="4" Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button x:Name="btnAddPlaceForUser" Grid.Column="0" Text="Thêm" FontAttributes="Bold" FontSize="Default" VerticalOptions="Center" HorizontalOptions="Center" BorderWidth="1" BorderColor="Aqua" BackgroundColor="#C0DCF8" Clicked="btnAddPlaceForUser_Clicked"/>
+                                    <Button x:Name="btnCancelAddPlace" Grid.Column="1" Text="Quay lại" FontAttributes="Bold" FontSize="Default" VerticalOptions="Center" HorizontalOptions="Center" Clicked="btnCancelAddPlace_Clicked" BorderWidth="1" BorderColor="Aqua" BackgroundColor="#C0DCF8"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+
+        <Grid x:Name="grdSelectPlace" Grid.Row="2" IsVisible="False" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="grdListAddPlaceUser" Grid.Row="0" IsVisible="True">
+                <StackLayout>
+                    <Frame OutlineColor="Aqua" CornerRadius="10" Margin="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0" FontSize="Medium" FontAttributes="Bold" Text="THÊM CƠ SỞ TÀI KHOẢN" TextColor="#3399FF" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Grid Grid.Row="1" Margin="5,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Row="0" Grid.Column="1" Margin="0" Text="All" FontSize="Small" FontAttributes="Italic" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                    <CheckBox x:Name="cbSelectAllPlace" Grid.Row="0" Grid.Column="0" CheckedChanged="cbSelectAllPlace_CheckedChanged" IsChecked="{Binding CheckAll}"/>
+                                    <CheckBox x:Name="cbSelectAllPlace2" Grid.Row="0" Grid.Column="0" IsVisible="False" CheckedChanged="cbSelectAllPlace2_CheckedChanged"/>
+                                </Grid>
+                            </Grid>
+                            <ListView x:Name="LstvListPlace" Grid.Row="1" HeightRequest="200" ItemsSource="{Binding ListPlace}" ItemTapped="LstvListPlace_ItemTapped" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorColor="Black" BackgroundColor="White">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell Tapped="ViewCel_Tapped">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Grid.Row="0" Grid.Column="2" Margin="0" Text="{Binding Name}" FontSize="Small" FontAttributes="Italic" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                                <CheckBox x:Name="cbSelectPlace" Grid.Column="1" CheckedChanged="cbSelectPlace_CheckedChanged" IsChecked="{Binding IsSelected}"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <Button x:Name="btnSelect" Grid.Row="2" Clicked="btnSelect_Clicked" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Chọn" FontAttributes="Bold" TextColor="Black" BorderWidth="1" BorderColor="Aqua" BackgroundColor="#C0DCF8"/>
+
+                        </Grid>
+                    </Frame>
+
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </Grid>
+</pages:PopupPage>

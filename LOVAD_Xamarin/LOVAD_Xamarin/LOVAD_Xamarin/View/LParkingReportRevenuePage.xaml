@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LOVAD_Xamarin.View.LParkingReportRevenuePage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="btnLogout" Text="Đăng xuất" Clicked="btnLogout_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView BackgroundColor="#C0DCF8">
+            <Grid BackgroundColor="#C0DCF8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Text="BÁO CÁO DOANH THU" Margin="5" FontAttributes="Italic" FontSize="Default" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center"/>
+
+                <Label Grid.Row="1" Text="THÔNG TIN TÌM KIẾM" FontAttributes="Bold" FontSize="Large" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                <Button x:Name="btnUnfold" Text="MỞ THÔNG TIN" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Italic" FontSize="Small" Grid.Row="2" BackgroundColor="#C0DCF8" Margin="5" Clicked="btnUnfold_Clicked">
+                    <Button.Image>
+                        <OnPlatform x:TypeArguments="FileImageSource" Android="up.png" iOS="up.png"/>
+                    </Button.Image>
+                </Button>
+                <Frame x:Name="grdSearchInformation" IsVisible="False" Grid.Row="3" HasShadow="True" BorderColor="Red" CornerRadius="5" Margin="5" OutlineColor="Aqua" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <Label Grid.Row="0" Grid.Column="0" Text="TỪ NGÀY" FontAttributes="Bold" TextColor="Black"/>
+                        <DatePicker x:Name="pkrStartDate" Grid.Row="1" Grid.Column="0"/>
+
+                        <Label Grid.Row="0" Grid.Column="1" Text="ĐẾN NGÀY" FontAttributes="Bold" TextColor="Black"/>
+                        <DatePicker x:Name="pkrEndDate" Grid.Row="1" Grid.Column="1"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="MÁY TRẠM" FontAttributes="Bold" TextColor="Black"/>
+                        <Button Grid.Row="3" Grid.Column="0" x:Name="btnStationCodeList" Clicked="btnStationCodeList_Clicked" Text="--Chọn--" FontAttributes="Bold" TextColor="Red" BackgroundColor="White" BorderWidth="1" FontSize="Micro" BorderColor="Aqua"/>
+
+                        <Label Grid.Row="2" Grid.Column="1" Text="LOẠI DỮ LIỆU" FontAttributes="Bold" TextColor="Black"/>
+                        <Picker x:Name="pkrVehicleDataType" Grid.Row="3" Grid.Column="1" Title="Chọn dữ liệu" TitleColor="Red" SelectedIndex="{Binding inVehicleDataType}">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Tất cả</x:String>
+                                    <x:String>Dữ liệu vào ra</x:String>
+                                    <x:String>Dữ liệu khách hàng</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+
+                        <Button x:Name="btnSearch" Clicked="btnSearch_Clicked" Grid.Row="4" Grid.ColumnSpan="2" Text="Tìm kiếm" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" TextColor="Black" BorderWidth="1" BorderColor="Aqua" BackgroundColor="White"/>
+
+                    </Grid>
+                </Frame>
+                <Grid Grid.Row="4" BackgroundColor="#117FAA" Margin="5">
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" Margin="0" Text="Tổng cộng" FontAttributes="Bold" FontSize="Large" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="0" Margin="0" Text="Số lượng vào:" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+                    <Label Grid.Row="2" Grid.Column="0" Margin="0" Text="Số lượng ra:" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+                    <Label Grid.Row="3" Grid.Column="0" Margin="0" Text="Tổng tiền:" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+
+                    <Label x:Name="tblTotalIn" Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding TotalIn, StringFormat='{0:0,0}'}}" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="tblTotalOut" Grid.Row="2" Grid.Column="1" Margin="0" Text="{Binding TotalOut, StringFormat='{0:0,0}'}}" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="tblTotalPrice" Grid.Row="3" Grid.Column="1" Margin="0" Text="{Binding TotalPrice, StringFormat='{0:0,0}'}" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="5" Margin="5" BackgroundColor="White">
+                    <ScrollView Orientation="Horizontal">
+                        <ListView x:Name="lstvReportRevenueLParking"
+                              HasUnevenRows="True"
+                              VerticalOptions                 ="FillAndExpand"
+                              CachingStrategy                 ="RecycleElement"
+                              HorizontalOptions               ="FillAndExpand"
+                              WidthRequest="1500"
+                              HeightRequest="300"
+                              ItemsSource="{Binding DataLParkingReport}">
+
+                            <ListView.Header>
+                                <Frame Margin="0" Padding="0" BorderColor="Black" BackgroundColor="#2196F3">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label  Grid.Column="0" Margin="0" Text="Tên máy trạm" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="1" Margin="0" Text="Nhân viên bảo vệ" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="2" Margin="0" Text="Loại đối tượng" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="3" Margin="0" Text="Loại khách hàng" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="4" Margin="0" Text="Số lượng vào" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="5" Margin="0" Text="Số lượng ra" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="6" Margin="0" Text="Tổng tiền" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+                                        <BoxView Grid.Column="0" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="1" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="2" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="3" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="4" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="5" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="6" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                    </Grid>
+                                </Frame>
+                            </ListView.Header>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell >
+
+                                        <Grid Margin="0" Padding="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+
+
+                                            <Label  Grid.Column="0" Margin="0" Text="{Binding StationName}" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                            <Label  Grid.Column="1" Margin="0" Text="{Binding CheckUser}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                            <Label  Grid.Column="2" Margin="0" Text="{Binding VehicleType}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                            <Label  Grid.Column="3" Margin="0" Text="{Binding CustomerType}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                            <Label  Grid.Column="4" Margin="0" Text="{Binding InCount}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                            <Label  Grid.Column="5" Margin="0" Text="{Binding OutCount}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                            <Label  Grid.Column="6" Margin="0" Text="{Binding TotalPrice}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+                                            <BoxView Grid.Column="0" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                            <BoxView Grid.Column="1" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                            <BoxView Grid.Column="2" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                            <BoxView Grid.Column="3" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                            <BoxView Grid.Column="4" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                            <BoxView Grid.Column="5" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                            <BoxView Grid.Column="6" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+
+                        </ListView>
+                    </ScrollView>
+
+                </Grid>
+            </Grid>
+        </ScrollView>
+
+        <Grid x:Name="grdIsBusy" IsVisible="False" BackgroundColor="Black" Opacity="0.5">
+            <ActivityIndicator x:Name="FormLoading" IsRunning="False" IsVisible="False" Color ="Aqua" VerticalOptions="Start" HorizontalOptions="Center"/>
+        </Grid>
+        <StackLayout x:Name="stlSelectDataSearch" IsVisible="False" HorizontalOptions="Center" VerticalOptions="Center">
+            <Frame x:Name="grdStationCodeList" OutlineColor="Aqua" IsVisible="False" CornerRadius="10" Margin="20" BackgroundColor="White">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" FontSize="Medium" FontAttributes="Bold" Text="MÁY TRẠM" TextColor="#3399FF" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Grid Grid.Row="1" Margin="5,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="1" Margin="0" Text="Tất cả" FontSize="Small" FontAttributes="Italic" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                            <CheckBox x:Name="cbSelectAll" CheckedChanged="cbSelectAll_CheckedChanged" Grid.Row="0" Grid.Column="0"/>
+                        </Grid>
+                    </Grid>
+                    <ListView Grid.Row="1" x:Name="LstvStationCodeList" ItemTapped="LstvStationCodeList_ItemTapped" BackgroundColor="White" HeightRequest="200" ItemsSource="{Binding StationCodeList}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorColor="Black">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell Tapped="ViewCell_Tapped">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Grid.Column="2" Margin="0" Text="{Binding Name}" FontSize="Small" FontAttributes="Italic" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                                        <CheckBox x:Name="cbSelect" CheckedChanged="cbSelect_CheckedChanged" Grid.Column="1" IsChecked="{Binding IsSelected}"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button x:Name="btnSelectItem"  Grid.Row="2" Clicked="btnSelectItem_Clicked" HorizontalOptions="Center" VerticalOptions="Center" Text="Chọn" FontAttributes="Bold" TextColor="Black" BorderWidth="1" BorderColor="Aqua" BackgroundColor="#C0DCF8"/>
+
+                </Grid>
+            </Frame>
+        </StackLayout>
+    </Grid>
+   
+
+   
+</ContentPage>

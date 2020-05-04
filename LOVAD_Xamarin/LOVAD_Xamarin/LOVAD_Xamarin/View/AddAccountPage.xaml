@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LOVAD_Xamarin.View.AddAccountPage">
+    <ScrollView BackgroundColor="#C0DCF8">
+        <Grid BackgroundColor="#C0DCF8" HorizontalOptions="Fill" VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="0" OutlineColor="Aqua" CornerRadius="10" Margin="5">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="ĐĂNG KÝ TÀI KHOẢN" FontAttributes="Bold" FontSize="Title" TextColor="#2196F3" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+                    <Image Grid.Row="1" Grid.Column="0" Source="user.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Entry x:Name="txtUserName" TextChanged="txtUserName_TextChanged" Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding UserName}" Placeholder="Tài khoản" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Row="2" Grid.Column="1" x:Name="tblUserName" IsVisible="False" Text="Vui lòng nhập tài khoản!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Image Grid.Row="3" Grid.Column="0" Source="password.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Entry x:Name="txtPassWord" TextChanged="txtPassWord_TextChanged" IsPassword="True" Grid.Row="3" Grid.Column="1" Margin="0" Text="{Binding PassWord}" Placeholder="Mật khẩu" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Row="4" Grid.Column="1" x:Name="tblPassWord" IsVisible="False" Text="Vui lòng nhập tài khoản!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Image Grid.Row="5" Grid.Column="0" Source="password.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Entry x:Name="txtConfirmPassword" IsPassword="True" TextChanged="txtConfirmPassword_TextChanged" Grid.Row="5" Grid.Column="1" Margin="0" Text="{Binding ConfirmPassword}" Placeholder="Nhập lại mật khẩu" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Row="6" Grid.Column="1" x:Name="tblConfirmPassword" IsVisible="False" Text="Vui lòng nhập tài khoản!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+                    <Label Grid.Row="7" Grid.Column="1" x:Name="tblErConfirmPassword" IsVisible="False" Text="Không trùng khớp mật khẩu!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Button x:Name="SaveAccount" Grid.Row="8" Grid.ColumnSpan="2" Text="Xác nhận" FontAttributes="Bold" FontSize="Default" VerticalOptions="Center" HorizontalOptions="Center" Clicked="SaveAccount_Clicked"/>
+
+                </Grid>
+            </Frame>
+         </Grid>
+    </ScrollView>
+</ContentPage>

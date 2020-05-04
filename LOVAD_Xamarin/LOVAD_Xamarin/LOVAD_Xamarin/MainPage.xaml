@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             mc:Ignorable="d"
+             x:Class="LOVAD_Xamarin.MainPage">
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Text="New" IconImageSource="account.png" Order="Secondary" Priority="0"/>
+        <ToolbarItem Text="New" IconImageSource="account.png" Order="Secondary" Priority="0"/>
+    </ContentPage.ToolbarItems>-->
+    <ScrollView BackgroundColor="#C0DCF8">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="grdUserAccount" Grid.Row="0" IsVisible="False" Margin="5" HorizontalOptions="End" VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnAccount" Grid.Column="1" Text="{Binding UserName}" FontAttributes="Italic"  BackgroundColor="#C0DCF8" Clicked="btnAccount_Clicked">
+                    <Button.Image>
+                        <OnPlatform x:TypeArguments="FileImageSource" Android="userprofileblack.png" iOS="userprofileblack.png"/>
+                    </Button.Image>
+                </Button>
+            </Grid>
+
+            <!--Dịch vụ-->
+            <Grid x:Name="grdService" IsVisible="False" Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Center" Margin="0,0,0,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                
+                <Frame HasShadow="True" OutlineColor="Aqua" CornerRadius="10" HorizontalOptions="Fill" VerticalOptions="Center">
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Dịch vụ" FontAttributes="Italic" FontSize="Medium" TextColor="#658CD9" />
+                        <!--LParking-->
+                        <Frame Grid.Row="1" HasShadow="True" OutlineColor="Aqua" CornerRadius="10" Margin="0,0,0,10">
+                            <Grid x:Name="grdLparking">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="LParkingClick"/>
+                                </Grid.GestureRecognizers>
+                                <!--<Image Grid.RowSpan="5" Grid.Row="0" Grid.Column="0"  WidthRequest="100"   HeightRequest="100"   HorizontalOptions="Start"   Margin="8" Source="lparking.png"/>-->
+                                <Label Grid.Row="0" Grid.Column="1" Text="LParking" TextColor="Black" FontAttributes="Bold" FontSize="Title"/>
+                                <Label Grid.Row="1"  Grid.Column="1" Text="Tổng cơ sở: " TextColor="Black" FontAttributes="Bold" FontSize="Default" />
+                                <Label Grid.Row="2" Grid.Column="1" Text="Tổng xe vào: " TextColor="Black" FontAttributes="Bold" FontSize="Default"/>
+                                <Label Grid.Row="3" Grid.Column="1" Text="Tổng xe ra: " TextColor="Black" FontAttributes="Bold" FontSize="Default"/>
+                                <Label Grid.Row="4" Grid.Column="1" Text="Tổng doanh thu: " TextColor="Black" FontAttributes="Bold" FontSize="Default"/>
+                                <Label Grid.Row="1"  Grid.Column="2" Text="" FontSize="Default" TextColor="Black"/>
+                                <Label Grid.Row="2"  Grid.Column="2" Text=""  FontSize="Default" TextColor="Black"/>
+                                <Label Grid.Row="3"  Grid.Column="2" Text=""  FontSize="Default" TextColor="Black"/>
+                                <Label Grid.Row="4"  Grid.Column="2" Text="" FontSize="Default" TextColor="Black"/>
+                            </Grid>
+                        </Frame>
+                        <!--Trạm Cân-->
+                        <Frame Grid.Row="2" HasShadow="True" OutlineColor="Aqua" CornerRadius="10" IsVisible="False">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TramCanClick"/>
+                                </Grid.GestureRecognizers>
+                                <!--<Image Grid.RowSpan="5" Grid.Row="0" Grid.Column="0"  WidthRequest="100"   HeightRequest="100"   HorizontalOptions="Start"   Margin="8" Source="lparking.png"/>-->
+                                <Label Grid.Row="0" Grid.Column="1" Text="Trạm Cân" TextColor="Black" FontAttributes="Bold" FontSize="Title"/>
+                                <Label Grid.Row="1"  Grid.Column="1" Text="Tổng cơ sở: " TextColor="Black" FontAttributes="Bold" FontSize="Default" />
+                                <Label Grid.Row="2" Grid.Column="1" Text="Tổng xe vào: " TextColor="Black" FontAttributes="Bold" FontSize="Default"/>
+                                <Label Grid.Row="3" Grid.Column="1" Text="Tổng xe ra: " TextColor="Black" FontAttributes="Bold" FontSize="Default"/>
+                                <Label Grid.Row="4" Grid.Column="1" Text="Tổng doanh thu: " TextColor="Black" FontAttributes="Bold" FontSize="Default"/>
+                                <Label Grid.Row="1"  Grid.Column="2" Text="" FontSize="Default" TextColor="Black"/>
+                                <Label Grid.Row="2"  Grid.Column="2" Text=""  FontSize="Default" TextColor="Black"/>
+                                <Label Grid.Row="3"  Grid.Column="2" Text=""  FontSize="Default" TextColor="Black"/>
+                                <Label Grid.Row="4"  Grid.Column="2" Text="" FontSize="Default" TextColor="Black"/>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </Frame>
+            </Grid>
+            <!--Tài khoản-->
+            <Grid x:Name="grdAccount" Grid.Row="2" IsVisible="False" HorizontalOptions="Fill" VerticalOptions="Center" Margin="0,0,0,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Frame OutlineColor="Aqua" HasShadow="True" CornerRadius="10">
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Tài khoản" FontAttributes="Italic" FontSize="Medium" TextColor="#658CD9" />
+   
+                        <Frame Grid.Row="1" OutlineColor="Aqua" CornerRadius="10">
+                            <Label Text="Quản lý tài khoản" FontSize="Title"  FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TaiKhoanClick"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        
+                    </Grid>
+                </Frame>
+            </Grid>
+            <!--Cơ sở-->
+            <Grid x:Name="grdPlace" Grid.Row="3" IsVisible="False" HorizontalOptions="Fill" VerticalOptions="Center" Margin="0,0,0,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Frame OutlineColor="Aqua" HasShadow="True" CornerRadius="10">
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Cơ sở" FontAttributes="Italic" FontSize="Medium" TextColor="#658CD9" />
+
+                        <Frame Grid.Row="1" OutlineColor="Aqua" CornerRadius="10">
+                            <Label Text="Quản lý cơ sở" FontSize="Title"  FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center"  HorizontalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="PlaceClick"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+
+                    </Grid>
+                </Frame>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

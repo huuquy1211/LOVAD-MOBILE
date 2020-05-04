@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LOVAD_Xamarin.View.LParkingListLostCardsPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="btnLogout" Text="Đăng xuất" Clicked="btnLogout_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ScrollView BackgroundColor="#C0DCF8">
+        <Grid BackgroundColor="#C0DCF8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Text="DANH SÁCH THẺ MẤT" Margin="5" FontAttributes="Italic" FontSize="Default" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center"/>
+
+            <Label Grid.Row="1" Text="THÔNG TIN TÌM KIẾM" FontAttributes="Bold" FontSize="Large" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+            <Button x:Name="btnUnfold" Text="MỞ THÔNG TIN" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Italic" FontSize="Small" Grid.Row="2" BackgroundColor="#C0DCF8" Margin="5" Clicked="btnUnfold_Clicked">
+                <Button.Image>
+                    <OnPlatform x:TypeArguments="FileImageSource" Android="up.png" iOS="up.png"/>
+                </Button.Image>
+            </Button>
+            <Frame x:Name="grdSearchInformation" IsVisible="False" Grid.Row="3" HasShadow="True" BorderColor="Red" CornerRadius="5" Margin="5" OutlineColor="Aqua" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="Từ" FontAttributes="Bold" TextColor="Black"/>
+                    <DatePicker x:Name="pkrStartDate" Date="{Binding startDate}" Grid.Row="1" Grid.Column="0"/>
+
+                    <Label Grid.Row="0" Grid.Column="1" Text="Đến" FontAttributes="Bold" TextColor="Black"/>
+                    <DatePicker x:Name="pkrEndDate" Date="{Binding endDate}" Grid.Row="1" Grid.Column="1"/>
+
+                    <Label Grid.Row="2" Grid.Column="0" Text="Loại đối tượng" FontAttributes="Bold" TextColor="Black"/>
+                    <Picker x:Name="pkrVehicle" Grid.Row="3" Grid.Column="0" Title="Chọn loại" TitleColor="Red" ItemsSource="{Binding VehicleList}" ItemDisplayBinding="{Binding Name}" SelectedIndexChanged="pkrVehicle_SelectedIndexChanged" />
+
+
+                    <Label Grid.Row="2" Grid.Column="1" Text="Loại thẻ" FontAttributes="Bold" TextColor="Black"/>
+                    <Picker x:Name="pkrCartType" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding CartTypeList}" ItemDisplayBinding="{Binding NameCartType}" Title="Chọn loại thẻ" TitleColor="Red" SelectedIndexChanged="pkrCartType_SelectedIndexChanged"/>
+
+                    <Label Grid.Row="4" Text="Thông tin tìm kiếm" FontAttributes="Bold" TextColor="Black"/>
+                    <Picker x:Name="pkrSearchField" Grid.Row="5" SelectedIndexChanged="pkrSearchField_SelectedIndexChanged" ItemsSource="{Binding SearchFieldList}" ItemDisplayBinding="{Binding NameSearchField}" Title="Chọn thông tin" TitleColor="Red"/>
+
+                    <Label Grid.Row="4" Grid.Column="1" Text="Nội dung tìm kiếm" FontAttributes="Bold" TextColor="Black"/>
+                    <Editor Grid.Row="5" Grid.Column="1" Text="{Binding searchContent}" Placeholder="Chọn nội dung"/>
+
+                    <Grid Grid.Row="6" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Text="Page size" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                        <Picker x:Name="pkrPageSize" Grid.Column="1" SelectedItem="{Binding PageSize}" Title="Page Size" HorizontalOptions="Fill" TitleColor="Red">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>10</x:String>
+                                    <x:String>20</x:String>
+                                    <x:String>30</x:String>
+                                    <x:String>50</x:String>
+                                    <x:String>100</x:String>
+                                    <x:String>All</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Grid>
+                    <Button x:Name="btnSearch" Clicked="btnSearch_Clicked" Grid.Row="7" Grid.ColumnSpan="2" Text="Tìm kiếm" TextColor="Black" FontAttributes="Bold" FontSize="Default" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                </Grid>
+            </Frame>
+
+
+            <Grid Grid.Row="4" Margin="5" BackgroundColor="White">
+                <ScrollView Orientation="Horizontal">
+                    <ListView x:Name="lstvDanhSachMatTheLParking"
+                              HasUnevenRows="True"
+                              VerticalOptions                 ="FillAndExpand"
+                              CachingStrategy                 ="RecycleElement"
+                              HorizontalOptions               ="FillAndExpand"
+                              WidthRequest="1500"
+                              HeightRequest="500"
+                              ItemsSource="{Binding ValList}"
+                              >
+
+                        <ListView.Header>
+                            <Frame Margin="0" Padding="0" BorderColor="Black" BackgroundColor="#2196F3">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label  Grid.Column="0" Margin="0" Text="STT" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <Label  Grid.Column="1" Margin="0" Text="Mã thẻ" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <Label  Grid.Column="2" Margin="0" Text="Loại đối tượng" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <Label  Grid.Column="3" Margin="0" Text="Biển số xe" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <Label  Grid.Column="4" Margin="0" Text="Thời gian vào" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <Label  Grid.Column="5" Margin="0" Text="Thời điểm ra" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <Label  Grid.Column="6" Margin="0" Text="Tổng thời lượng" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <Label  Grid.Column="7" Margin="0" Text="Loại vé" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <Label  Grid.Column="8" Margin="0" Text="Tổng tiền" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+                                    <BoxView Grid.Column="0" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                    <BoxView Grid.Column="1" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                    <BoxView Grid.Column="2" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                    <BoxView Grid.Column="3" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                    <BoxView Grid.Column="4" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                    <BoxView Grid.Column="5" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                    <BoxView Grid.Column="6" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                    <BoxView Grid.Column="7" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                    <BoxView Grid.Column="8" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Grid>
+                            </Frame>
+                        </ListView.Header>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+
+                                    <Grid Margin="0" Padding="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label  Grid.Column="0" Margin="0" Text="{Binding Index}" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="1" Margin="0" Text="{Binding CardCode}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="2" Margin="0" Text="{Binding VehicleName}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="3" Margin="0" Text="{Binding VehicleNumberPlate}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="4" Margin="0" Text="{Binding TimeIn}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="5" Margin="0" Text="{Binding TimeOut}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="6" Margin="0" Text="{Binding ParkingTime}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="7" Margin="0" Text="{Binding CardType}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                        <Label  Grid.Column="8" Margin="0" Text="{Binding Price}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                       
+                                        <BoxView Grid.Column="0" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="1" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="2" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="3" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="4" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="5" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="6" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="7" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                        <BoxView Grid.Column="8" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+                                      
+                                    </Grid>
+
+
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollView>
+            </Grid>
+        </Grid>
+    </ScrollView>
+    <!--<ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Frame HasShadow="True" BorderColor="Red" CornerRadius="5" OutlineColor="Black" Margin="5">
+                <Grid Grid.Row="0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="DANH SÁCH MẤT THẺ" FontAttributes="Italic" FontSize="Default" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    <Label Grid.Row="1" Grid.ColumnSpan="2" Text="THÔNG TIN TÌM KIẾM" FontAttributes="Bold" FontSize="Large" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                    
+                </Grid>
+            </Frame>
+
+           
+
+            <Grid Grid.Row="1" Margin="5">
+                
+
+            </Grid>
+        </Grid>
+    </ScrollView>-->
+</ContentPage>

@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LOVAD_Xamarin.View.PlacePage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="addPlace" IconImageSource="add.png" Clicked="addPlace_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ListView x:Name="lstvPlace" ItemsSource="{Binding ListPlace}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorColor="Black" BackgroundColor="#C0DCF8">
+        <ListView.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="btnUnfold" Text="MỞ THÔNG TIN" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Italic" FontSize="Small" Grid.Row="0" BackgroundColor="#C0DCF8" Margin="5" Clicked="btnUnfold_Clicked">
+                    <Button.Image>
+                        <OnPlatform x:TypeArguments="FileImageSource" Android="up.png" iOS="up.png"/>
+                    </Button.Image>
+                </Button>
+                
+                <Frame x:Name="grdSearchInformation" IsVisible="False" Grid.Row="1" HasShadow="True" BorderColor="Red" CornerRadius="5" Margin="5" OutlineColor="Aqua" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Text="Tên cơ sở" FontAttributes="Bold" TextColor="Black"/>
+                        <Editor Grid.Row="1" Grid.Column="0" Text="{Binding PlaceNameSearch}" Placeholder="PlaceName"/>
+
+                        <Label Grid.Row="0" Grid.Column="1" Text="Địa chỉ IP" FontAttributes="Bold" TextColor="Black"/>
+                        <Editor Grid.Row="1" Grid.Column="1" Text="{Binding IpAddressSearch}" Placeholder="IpAddress"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="Port Api" FontAttributes="Bold" TextColor="Black"/>
+                        <Editor Grid.Row="3" Grid.Column="0" Text="{Binding PortApiSearch}" Placeholder="PortApi"/>
+
+                        <Label Grid.Row="2" Grid.Column="1" Text="Loại cơ sở" FontAttributes="Bold" TextColor="Black"/>
+
+                        <Picker x:Name="pkrTypePlaceSearch" SelectedIndexChanged="pkrTypePlaceSearch_SelectedIndexChanged" Grid.Row="3" Grid.Column="1" Title="Chọn loại cơ sở" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TitleColor="Red">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>LParking</x:String>
+                                    <x:String>Trạm cân</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+
+                        <Button x:Name="btnSearch" Grid.Row="5" Grid.ColumnSpan="2" Clicked="btnSearch_Clicked" Text="Tìm kiếm" TextColor="Black" FontAttributes="Bold" FontSize="Default" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White" BorderWidth="1" BorderColor="Aqua"/>
+                    </Grid>
+                </Frame>
+                <BoxView Grid.Row="2"
+                             HeightRequest="1"
+                             BackgroundColor="#5D82C9"
+                             Margin="0,10,0,10"
+                             />
+
+                <Label Grid.Row="3" FontSize="Title" FontAttributes="Bold" Text="DANH SÁCH CƠ SỞ" TextColor="#3399FF" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <BoxView Grid.Row="4"
+                             HeightRequest="1"
+                             BackgroundColor="#5D82C9"
+                             Margin="0,10,0,10"/>
+                <Grid Grid.Row="5" Margin="5,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+
+                    </Grid.ColumnDefinitions>
+
+                  
+                    <Label  Grid.Column="2" Margin="0" Text="PageSize"  FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Picker x:Name="pkrPageSize" SelectedIndexChanged="pkrPageSize_SelectedIndexChanged" Grid.Column="3" SelectedItem="{Binding PageSize}" Title="Page Size" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TitleColor="Red">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>All</x:String>
+                                <x:String>10</x:String>
+                                <x:String>20</x:String>
+                                <x:String>30</x:String>
+                                <x:String>50</x:String>
+                                <x:String>100</x:String>
+
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Grid>
+
+            </Grid>
+        </ListView.Header>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Frame OutlineColor="Aqua" Margin="5" CornerRadius="5" BackgroundColor="White">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Margin="0" Text="Tên cơ sở:" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                            <Label x:Name="lblNamePlace" Grid.Row="0" Grid.Column="1" Margin="0" Text="{Binding Name}" FontSize="Large" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                            
+                            <Label Grid.Row="1" Grid.Column="0" Margin="0" Text="Địa chỉ:" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                            <Label x:Name="lblAddress" Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding Address}" FontSize="Large" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                            
+                            <Label Grid.Row="2" Grid.Column="0" Margin="0" Text="Địa chỉ IP:" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                            <Label x:Name="lblIPAddress" Grid.Row="2" Grid.Column="1" Margin="0" Text="{Binding IpAddress}" FontSize="Large" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+
+                            <Grid Grid.Row="3" Grid.ColumnSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button x:Name="btnEditPlace" Grid.Column="0" Clicked="btnEditPlace_Clicked" BackgroundColor="White" HorizontalOptions="Fill" VerticalOptions="Center" CommandParameter="{Binding Id}">
+                                    <Button.Image>
+                                        <OnPlatform x:TypeArguments="FileImageSource" Android="edit.png" iOS="edit.png"/>
+                                    </Button.Image>
+                                </Button>
+
+                                <Button x:Name="btnDelPlace" Grid.Column="1" Clicked="btnDelPlace_Clicked"  HorizontalOptions="Fill" BackgroundColor="White" VerticalOptions="Center" CommandParameter="{Binding Id}">
+                                    <Button.Image>
+                                        <OnPlatform x:TypeArguments="FileImageSource" Android="recycle.png" iOS="recycle.png"/>
+                                    </Button.Image>
+                                </Button>
+
+
+                            </Grid>
+                        </Grid>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Footer>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="lblCurentPage" Grid.Row="0" Grid.ColumnSpan="4" FontAttributes="Bold" FontSize="Small" TextColor="Red" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                <Button x:Name="btnFristPage" Grid.Row="1" Grid.Column="0" BorderColor="Aqua" BorderWidth="1" BackgroundColor="White" FontAttributes="Bold" Text="Đầu"  HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"  Margin="5" Clicked="btnFristPage_Clicked"/>
+                <Button x:Name="btnBackPage" Grid.Row="1" Grid.Column="1" BorderColor="Aqua" BorderWidth="1" BackgroundColor="White" FontAttributes="Bold" Text="Lùi"  HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro" Margin="5" Clicked="btnBackPage_Clicked"/>
+
+
+
+                <Button x:Name="btnNextPage" Grid.Row="1" Grid.Column="2" BorderColor="Aqua" BorderWidth="1" BackgroundColor="White" FontAttributes="Bold" Text="Tiếp" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"  Margin="5" Clicked="btnNextPage_Clicked"/>
+                <Button x:Name="btnLastPage" Grid.Row="1" Grid.Column="3" BorderColor="Aqua" BorderWidth="1" BackgroundColor="White" FontAttributes="Bold" Text="Cuối" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro" Margin="5" Clicked="btnLastPage_Clicked"/>
+
+            </Grid>
+        </ListView.Footer>
+    </ListView>
+
+</ContentPage>

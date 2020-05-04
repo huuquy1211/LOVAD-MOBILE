@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             mc:Ignorable="d"
+             x:Class="LOVAD_Xamarin.View.EditUserProfilePage">
+    <ScrollView BackgroundColor="#C0DCF8" x:Name="scrUserProfile">
+        <Grid BackgroundColor="#C0DCF8" HorizontalOptions="Fill" VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Frame x:Name="grdAccountInfo" Grid.Row="0" OutlineColor="Aqua" CornerRadius="10" Margin="5,10,5,5">
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="THÔNG TIN TÀI KHOẢN" FontAttributes="Bold" FontSize="Title" TextColor="#2196F3" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+                    <Image Grid.Row="1" Grid.Column="0" Source="user.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Entry x:Name="txtUserName" TextChanged="txtUserName_TextChanged" Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding UserName}" Placeholder="Tài khoản" IsReadOnly="True" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label x:Name="tblUserName" Grid.Row="2" Grid.Column="1"  IsVisible="False" Text="Vui lòng nhập tên tài khoản!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Image Grid.Row="3" Grid.Column="0" Source="username.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Entry x:Name="txtFullName" TextChanged="txtFullName_TextChanged" Grid.Row="3" Grid.Column="1" Margin="0" Text="{Binding FullName}" Placeholder="Họ và tên" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label x:Name="tblFullName" Grid.Row="4" Grid.Column="1"  IsVisible="False" Text="Vui lòng nhập tên đầy đủ!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Image Grid.Row="5" Grid.Column="0" Source="phone.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Entry x:Name="txtPhoneNumber" TextChanged="txtPhoneNumber_TextChanged" Grid.Row="5" Grid.Column="1" Margin="0" Text="{Binding PhoneNumber}" Placeholder="Số điện thoại" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Row="6" Grid.Column="1" x:Name="tblPhoneNumber" IsVisible="False" Text="Vui lòng nhập số điện thoại!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Image Grid.Row="7" Grid.Column="0" Source="email.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Entry x:Name="txtEmail" TextChanged="txtEmail_TextChanged" Grid.Row="7" Grid.Column="1" Margin="0" Text="{Binding Email}" Placeholder="Email" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Row="8" Grid.Column="1" x:Name="tblEmail" IsVisible="False" Text="Vui lòng nhập Email!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Grid x:Name="grdVerificationEmail" Grid.Row="9" Grid.ColumnSpan="2" IsVisible="False">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" x:Name="tblVerificationEmail" Text="Email chưa xác nhận!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"/>
+
+                        <Button Grid.Column="1" x:Name="btnSendVerificationEmail" Clicked="btnSendVerificationEmail_Clicked" Text="Xác nhận"/>
+                    </Grid>
+
+                    <Button x:Name="btnUpdateProfile" Clicked="btnUpdateProfile_Clicked" Grid.Row="10" Grid.ColumnSpan="2" Text="Lưu" FontAttributes="Bold" FontSize="Default" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+            </Frame>
+
+            <Frame x:Name="grdChangePassword" Grid.Row="1" OutlineColor="Aqua" CornerRadius="10" Margin="5">
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="ĐỔi MẬT KHẨU" FontAttributes="Bold" FontSize="Title" TextColor="#2196F3" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+                    <Image Grid.Row="1" Grid.Column="0" IsVisible="False" Source="user.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Entry x:Name="txtUserNameChange" IsVisible="False" TextChanged="txtUserNameChange_TextChanged" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding UserNameChange}" Placeholder="Tài khoản" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label x:Name="tblUserNameChange" IsVisible="False" Grid.Row="2" Grid.Column="1" Text="Vui lòng nhập tài khoản!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Image Grid.Row="3" Grid.Column="0" Source="password.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Entry x:Name="txtCurrentPass" TextChanged="txtCurrentPass_TextChanged" Grid.Row="3" Grid.Column="1" IsPassword="True" Margin="0" Text="{Binding CurrentPass}" Placeholder="Mật khẩu cũ" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Row="4" Grid.Column="1" x:Name="tblCurrentPass" IsVisible="False" Text="Vui lòng nhập mật khẩu cũ!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Image Grid.Row="5" Grid.Column="0" Source="password.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Entry x:Name="txtNewPass" TextChanged="txtNewPass_TextChanged" Grid.Row="5" Grid.Column="1" IsPassword="True" Margin="0" Text="{Binding NewPass}" Placeholder="Mật khẩu mới" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Row="6" Grid.Column="1" x:Name="tblNewPass" IsVisible="False" Text="Vui lòng nhập mật khẩu mới!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+                    <Label Grid.Row="7" Grid.Column="1" x:Name="tblErrNewPass" IsVisible="False" Text="Không được trùng mật khẩu cũ!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Image Grid.Row="8" Grid.Column="0" Source="password.png" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Entry x:Name="txtNewPassConfirm" TextChanged="txtNewPassConfirm_TextChanged" Grid.Row="8" Grid.Column="1" IsPassword="True" Margin="0" Text="{Binding NewPassConfirm}" Placeholder="Nhập lại mật khẩu" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Row="9" Grid.Column="1" x:Name="tblNewPassConfirm" IsVisible="False" Text="Vui lòng nhập lại mật khẩu!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+                    <Label Grid.Row="10" Grid.Column="1" x:Name="tblErrNewPassConfirm" IsVisible="False" Text="Không trùng khớp mật khẩu!" FontSize="Small" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Button x:Name="btnSaveChangePassword" Clicked="btnSaveChangePassword_Clicked" Grid.Row="11" Grid.ColumnSpan="2" Text="Lưu" FontAttributes="Bold" FontSize="Default" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+                </Grid>
+            </Frame>
+
+            <Frame x:Name="grdLogOut" Grid.Row="2" OutlineColor="Aqua" CornerRadius="10" Margin="5,5,5,10">
+                <Grid Grid.Row="2">
+                    <Label Grid.Row="0" Text="ĐĂNG XUẤT" FontAttributes="Bold" FontSize="Title" TextColor="#2196F3" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+                    <Button x:Name="btnLogout" Grid.Row="1" BackgroundColor="White" Clicked="btnLogout_Clicked">
+                        <Button.Image>
+                            <OnPlatform x:TypeArguments="FileImageSource" Android="logout.png" iOS="logout.png"/>
+                        </Button.Image>
+                    </Button>
+                </Grid>
+            </Frame>
+
+            <!--<forms:AnimationView x:Name="frmLoading" Grid.Row="0"  Animation="sendmail2.json" IsPlaying="False" IsVisible="False" IsEnabled="False"  Loop="True" AutoPlay="True" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" />-->
+        </Grid>
+    </ScrollView>
+</ContentPage>

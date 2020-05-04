@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             mc:Ignorable="d"
+             x:Class="LOVAD_Xamarin.View.LoginPage">
+
+    <ScrollView BackgroundColor="#C0DCF8">
+        <Grid BackgroundColor="#C0DCF8" HorizontalOptions="Fill" VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Frame x:Name="grdLogin" OutlineColor="Aqua" CornerRadius="10" Margin="5" IsVisible="True">
+                <Grid Grid.Row="0" BackgroundColor="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Column="0" x:Name="btnSetting" Text="Cấu hình ứng dụng" BackgroundColor="White" Clicked="btnSetting_Clicked" HorizontalOptions="Start">
+                        <Button.Image>
+                            <OnPlatform x:TypeArguments="FileImageSource" Android="setting.png" iOS="setting.png"/>
+                        </Button.Image>
+                    </Button>
+                    <Image Grid.Row="1" WidthRequest="150"  HeightRequest="150"  HorizontalOptions="Center"  Margin="8" Source="logolovad.png" />
+                    <Label  Text="Đăng nhập" Grid.Row="2" FontSize="Title"  FontAttributes="Bold" TextColor="#658CD9"  VerticalTextAlignment="Center"  HorizontalTextAlignment="Center"/>
+
+                    <Grid Grid.Row="3" RowSpacing="0" Margin="0,50,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Image
+                   Grid.Column="0"
+                 Grid.Row="0"
+                   WidthRequest="30"
+                   HeightRequest="30"
+                   HorizontalOptions="End"
+                   Margin="8"
+                   Source="user.png"/>
+                        <Entry x:Name="txtUserName" TextChanged="txtUserName_TextChanged" Text="{Binding UserName, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" FontSize="Medium" Placeholder="Tài khoản" />
+
+                        <Label Grid.Row="1" Grid.Column="1" x:Name="lblUserNameErr" Text="Vui lòng nhập tài khoản!" FontSize="Small" TextColor="Red" IsVisible="False"/>
+                        <Image Grid.Column="0" Grid.Row="2" WidthRequest="30" HeightRequest="30" HorizontalOptions="End" Margin="8" Source="password.png"/>
+                        <Entry x:Name="txtPassWord" TextChanged="txtPassWord_TextChanged" Text="{Binding PassWord}" Grid.Row="2" Grid.Column="1" FontSize="Medium" IsPassword="True" Placeholder="Mật khẩu" />
+
+                        <Button Grid.Column="2"
+                        Grid.Row="2"
+                        x:Name="btnShowPassWord"
+                        BackgroundColor="White"
+                        Clicked="btnShowPassWord_Clicked">
+                            <Button.Image>
+                                <OnPlatform x:TypeArguments="FileImageSource"
+                                    Android="hiden.png" iOS="hiden.png"/>
+                            </Button.Image>
+                        </Button>
+                        <Label Grid.Row="3" Grid.Column="1" x:Name="lblPassWordErr" Text="Vui lòng nhập mật khẩu!" FontSize="Small" TextColor="Red" IsVisible="False"/>
+                        <Grid Grid.Row="4"
+                    Grid.Column="1" Margin="0,20,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="8*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <CheckBox
+                                x:Name="chkRememberPassword"
+                                IsChecked="{Binding RememberMe}"
+                                Grid.Column="0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"/>
+
+                            <Label  Text="Lưu mật khẩu"
+                            Grid.Column="1"
+                            FontSize="Small"
+                            FontAttributes="None"
+                            TextColor="Black"
+                            VerticalTextAlignment="Center" 
+                            HorizontalTextAlignment="Start"/>
+                        </Grid>
+                        <Button
+                        x:Name="btnLogin"
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Text ="Đăng nhập" TextColor ="White" 
+                        FontAttributes = "Bold" 
+                        FontSize = "Medium" 
+                        HorizontalOptions = "FillAndExpand"
+                        BackgroundColor = "Green"
+                        Clicked="btnLogin_Clicked"/>
+                        <Label x:Name="tblForgotPassword" IsVisible="False"  Text="Quên mật khẩu?" Grid.Row="6" Grid.Column="1" FontSize="Small"  FontAttributes="None" FontFamily="" TextColor="Black"  VerticalTextAlignment="End"  HorizontalTextAlignment="Center" Margin="0,20,0,20">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="tblForgotPassword_Tapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Grid>
+            </Frame>
+
+            <Frame x:Name="grdSetting" OutlineColor="Aqua" CornerRadius="10" Margin="5" IsVisible="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="2"  FontSize="Large" FontAttributes="Bold" TextColor="Aqua" HorizontalOptions="Center" VerticalOptions="Center" Text="CÀI ĐẶT"  />
+
+                    <Entry x:Name="txtIpAddress" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding IpAddress}" TextChanged="txtIpAddress_TextChanged" Placeholder="Địa chỉ IP" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name="tblErrIpAddress" Grid.Row="2" Grid.ColumnSpan="2" FontSize="Small" IsVisible="False" TextColor="Red" Text="Vui lòng nhập địa chỉ Ip!"  />
+
+                    <Entry  x:Name="txtPortAPI"  Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding PortAPI}" TextChanged="txtPortAPI_TextChanged" Placeholder="PortAPI" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name="tblErrPortAPI" Grid.Row="4" Grid.ColumnSpan="2" FontSize="Small"  IsVisible="False" TextColor="Red" Text="Vui lòng nhập Port API!"  />
+
+                    <Button Grid.Row="5" x:Name="btnSaveSetting" Grid.Column="0" Text="Lưu" BackgroundColor = "White" BorderWidth="1" BorderColor="Aqua" Clicked="btnSaveSetting_Clicked" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Button.Image>
+                            <OnPlatform x:TypeArguments="FileImageSource" Android="save.png" iOS="save.png"/>
+                        </Button.Image>
+                    </Button>
+
+                    <Button Grid.Row="5" x:Name="btnCloseSetting" Grid.Column="1" Text="Đóng" BackgroundColor = "White" BorderWidth="1" BorderColor="Aqua" Clicked="btnCloseSetting_Clicked" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+
+                </Grid>
+               
+            </Frame>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

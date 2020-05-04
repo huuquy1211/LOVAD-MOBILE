@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LOVAD_Xamarin.View.AddPlacePage">
+    <ScrollView BackgroundColor="#C0DCF8">
+        <Grid HorizontalOptions="Fill" VerticalOptions="Center" BackgroundColor="#C0DCF8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Frame OutlineColor="Aqua" CornerRadius="10" Margin="5,10,5,10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="lbTitle" Grid.Row="0" Text="ĐĂNG KÝ CƠ SỞ" FontAttributes="Bold" FontSize="Title" TextColor="#2196F3" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Picker x:Name="pkrTypePlace" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Title="----Vui lòng chọn loại cơ sở----" TitleColor="Red">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>LParking</x:String>
+                                <x:String>Trạm Cân</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    
+                    <Entry x:Name="txtPlaceName" Grid.Row="2"  Text="{Binding Name}" TextChanged="txtPlaceName_TextChanged"  Placeholder="Tên cơ sở" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name="tblErrPlaceName" Grid.Row="3" FontSize="Small"  IsVisible="False" TextColor="Red" Text="Vui lòng nhập tên cơ sở!"  />
+
+
+                 
+                    <Entry x:Name="txtAddress" Grid.Row="4" Text="{Binding Address}" TextChanged="txtAddress_TextChanged" Placeholder="Địa chỉ" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name="tblErrAddress" Grid.Row="5"  FontSize="Small" IsVisible="False" TextColor="Red" Text="Vui lòng nhập địa chỉ!"  />
+                    
+                    <Entry  x:Name="txtUsernameAPI"  Grid.Row="6" Text="{Binding UserNameAPI}" TextChanged="txtUsernameAPI_TextChanged" Placeholder="Tài khoản API" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name="tblErrUsernameAPI" Grid.Row="7" FontSize="Small"  IsVisible="False" TextColor="Red" Text="Vui lòng nhập tên tài khoản API!"  />
+
+                    <Entry  x:Name="txtPassWordAPI"   Grid.Row="8" Text="{Binding PassWordAPI}" TextChanged="txtPassWordAPI_TextChanged" IsPassword="True"  Placeholder="Mật khẩu API"  VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name="tblErrPassWordAPI" Grid.Row="9" FontSize="Small"  IsVisible="False" TextColor="Red" Text="Vui lòng nhập mật khẩu API!"  />
+
+                    <Entry x:Name="txtIpAddress" Grid.Row="10" Text="{Binding IpAddress}" TextChanged="txtIpAddress_TextChanged" Placeholder="Địa chỉ IP" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name="tblErrIpAddress" Grid.Row="11"  FontSize="Small" IsVisible="False" TextColor="Red" Text="Vui lòng nhập địa chỉ Ip!"  />
+
+                    <Entry  x:Name="txtPortAPI"  Grid.Row="12" Text="{Binding PortAPI}" TextChanged="txtPortAPI_TextChanged" Placeholder="PortAPI" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name="tblErrPortAPI" Grid.Row="13" FontSize="Small"  IsVisible="False" TextColor="Red" Text="Vui lòng nhập Port API!"  />
+
+                    <Entry  x:Name="txtUsernameDB"  Grid.Row="14" Text="{Binding UserNameDB}" TextChanged="txtUsernameDB_TextChanged" Placeholder="Tài khoản Database" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name="tblErrUsernameDB" Grid.Row="15" FontSize="Small"  IsVisible="False" TextColor="Red" Text="Vui lòng nhập tên tài khoản Database!"  />
+
+                    <Entry  x:Name="txtPassWordDB"   Grid.Row="16" Text="{Binding PassWordDB}" TextChanged="txtPassWordDB_TextChanged" IsPassword="True"  Placeholder="Mật khẩu Database"  VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name="tblErrPassWordDB" Grid.Row="17" FontSize="Small"  IsVisible="False" TextColor="Red" Text="Vui lòng nhập mật khẩu Database!"  />
+
+                    <Entry  x:Name="txtPortDB"  Grid.Row="18" Text="{Binding PortDB}" TextChanged="txtPortDB_TextChanged" Placeholder="PortDB" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <Label x:Name="tblErrPortDB" Grid.Row="19" FontSize="Small"  IsVisible="False" TextColor="Red" Text="Vui lòng nhập Port database!"  />
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="20"  Grid.Column="0" HorizontalOptions="Center">
+                        <Button x:Name="btnCheckPlace"  Clicked="btnCheckPlace_Clicked" VerticalOptions="Center" HorizontalOptions="Center"  Text="Kiểm tra" IsEnabled="True"/>
+                        <Button x:Name="btnSave"  Clicked="btnSave_Clicked" VerticalOptions="Center" HorizontalOptions="Center"  Text="Lưu" IsEnabled="False"/>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</ContentPage>
