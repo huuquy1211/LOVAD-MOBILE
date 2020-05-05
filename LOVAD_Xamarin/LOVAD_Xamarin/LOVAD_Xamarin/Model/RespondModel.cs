@@ -13,7 +13,7 @@ namespace LOVAD_Xamarin.Model
         {
             Result = true;
             Content = new List<string>();
-            UserRespond = null;
+            UserRespond = new UserModel();
         }
     }
 

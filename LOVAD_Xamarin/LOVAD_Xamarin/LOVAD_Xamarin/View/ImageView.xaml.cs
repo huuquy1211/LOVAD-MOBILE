@@ -50,9 +50,15 @@ namespace LOVAD_Xamarin.View
 
 
         }
-        //private async void btnCancel_Clicked(object sender, EventArgs e)
-        //{
-        //    await PopupNavigation.Instance.PopAllAsync(true);
-        //}
+
+        private async void btnCancel_Clicked(object sender, EventArgs e)
+        {
+            await PopupNavigation.Instance.PopAllAsync(true);
+        }
+       
+        private async void imgShowView_Tapped(object sender, EventArgs e)
+        {
+            await PopupNavigation.Instance.PopAllAsync(true);
+        }
     }
 }

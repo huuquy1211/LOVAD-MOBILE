@@ -65,6 +65,8 @@ namespace LOVAD_Xamarin.View
             lbTitle.Text = "ĐĂNG KÝ CƠ SỞ";
             if (Result.Equals("EditPlace"))
             {
+                btnSave.IsEnabled = true;
+                btnCheckPlace.IsEnabled = false;
                 lbTitle.Text = "CHỈNH SỬA CƠ SỞ";
                 Name = placeModel.Name;
                 PassWordAPI = placeModel.PassWordAPI;
@@ -77,6 +79,12 @@ namespace LOVAD_Xamarin.View
                 Address = placeModel.Address;
                 IpAddress = placeModel.IpAddress;
             }
+            else
+            {
+                btnSave.IsEnabled = false;
+                btnCheckPlace.IsEnabled = true;
+            }
+            
             //else
             //{
             //    Name = "";
@@ -90,17 +98,17 @@ namespace LOVAD_Xamarin.View
             //    Address = "";
             //}
 
-#if DEBUG
-            Name = "Đại học Công Nghiệp HCM";
-            PassWordAPI = "!Quy1234";
-            PassWordDB = "123";
-            PortAPI = "1234";
-            PortDB = "1234";
-            UserNameAPI = "huuquy";
-            UserNameDB = "sa";
-            Address = "Hồ Chí Minh";
-            IpAddress = "192.168.1.1";
-#endif
+            //#if DEBUG
+            //            Name = "Đại học Công Nghiệp HCM";
+            //            PassWordAPI = "!Quy1234";
+            //            PassWordDB = "123";
+            //            PortAPI = "1234";
+            //            PortDB = "1234";
+            //            UserNameAPI = "huuquy";
+            //            UserNameDB = "sa";
+            //            Address = "Hồ Chí Minh";
+            //            IpAddress = "192.168.1.1";
+            //#endif
         }
 
         private async void btnSave_Clicked(object sender, EventArgs e)
@@ -164,7 +172,7 @@ namespace LOVAD_Xamarin.View
                         else
                         {
                             var message = "Thêm không thành công!";
-                            await DisplayAlert("Thông báo", message, "OK");
+                            DependencyService.Get<IMessage>().LongTime(message);
                         }
                     }
                     catch (Exception ex)
@@ -185,7 +193,7 @@ namespace LOVAD_Xamarin.View
             }
             else //EditPlace
             {
-
+                
                 if (tblErrPlaceName.IsVisible == false && tblErrIpAddress.IsVisible == false && tblErrAddress.IsVisible == false && tblErrPassWordAPI.IsVisible == false && tblErrPassWordDB.IsVisible == false && tblErrPortAPI.IsVisible == false && tblErrPortDB.IsVisible == false && tblErrUsernameAPI.IsVisible == false && tblErrUsernameDB.IsVisible == false && pkrTypePlace.SelectedItem != null && !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Address) && !string.IsNullOrEmpty(PortDB) && !string.IsNullOrEmpty(UserNameDB) && !string.IsNullOrEmpty(PassWordDB) && !string.IsNullOrEmpty(PortAPI) && !string.IsNullOrEmpty(UserNameAPI) && !string.IsNullOrEmpty(PassWordAPI) && pkrTypePlace.SelectedIndex != -1)
                 {
                     placeModel.Name = Name;
@@ -217,7 +225,7 @@ namespace LOVAD_Xamarin.View
 
                         var responseData = JsonConvert.DeserializeObject<RespondPlaceModel>(result);
                        
-                        if (responseData.Result == true)
+                        if (responseData != null && responseData.Result == true)
                         {
                             MessagingCenter.Send(this, "Update");//Gửi thông điệp update listview về PlacePage
                             await Navigation.PopAsync();
@@ -226,8 +234,8 @@ namespace LOVAD_Xamarin.View
                         }
                         else
                         {
-                            var message1 = "Thêm không thành công!";
-                            await DisplayAlert("Thông báo", message1, "OK");
+                            var message = "Không thành công!";
+                            DependencyService.Get<IMessage>().LongTime(message);
                         }
                     }
                     catch (Exception ex)
@@ -338,16 +346,55 @@ namespace LOVAD_Xamarin.View
 
         private void txtPortAPI_TextChanged(object sender, TextChangedEventArgs e)
         {
-            btnSave.IsEnabled = false;
-            if (!regExr.NumberReg(PortAPI))
+            if (!Result.Equals("EditPlace"))
             {
-                tblErrPortAPI.Text = "Port API phải là số (VD: 123, 456, ...)";
-                tblErrPortAPI.IsVisible = true;
+                btnSave.IsEnabled = false;
+                if (!regExr.NumberReg(PortAPI))
+                {
+                    tblErrPortAPI.Text = "Port API phải là số (VD: 123, 456, ...)";
+                    tblErrPortAPI.IsVisible = true;
+                }
+                else
+                    tblErrPortAPI.IsVisible = false;
             }
             else
-                tblErrPortAPI.IsVisible = false;
+            {
+                if (!regExr.NumberReg(PortAPI))
+                {
+                    tblErrPortAPI.Text = "Port API phải là số (VD: 123, 456, ...)";
+                    tblErrPortAPI.IsVisible = true;
+                }
+                else
+                    tblErrPortAPI.IsVisible = false;
+            }
+            
         }
 
+        private void txtIpAddress_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!Result.Equals("EditPlace"))
+            {
+                btnSave.IsEnabled = false;
+                if (!regExr.AddressReg(IpAddress))
+                {
+                    tblErrIpAddress.Text = "Vui lòng nhập địa chỉ IP!";
+                    tblErrIpAddress.IsVisible = true;
+                }
+                else
+                    tblErrIpAddress.IsVisible = false;
+            }
+            else
+            {
+                if (!regExr.AddressReg(IpAddress))
+                {
+                    tblErrIpAddress.Text = "Vui lòng nhập địa chỉ IP!";
+                    tblErrIpAddress.IsVisible = true;
+                }
+                else
+                    tblErrIpAddress.IsVisible = false;
+            }
+            
+        }
         private void txtUsernameDB_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!regExr.StringOrNumberReg(UserNameDB))
@@ -392,17 +439,7 @@ namespace LOVAD_Xamarin.View
                 tblErrAddress.IsVisible = false;
         }
 
-        private void txtIpAddress_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            btnSave.IsEnabled = false;
-            if (!regExr.AddressReg(IpAddress))
-            {
-                tblErrIpAddress.Text = "Vui lòng nhập địa chỉ IP!";
-                tblErrIpAddress.IsVisible = true;
-            }
-            else
-                tblErrIpAddress.IsVisible = false;
-        }
+       
 
     }
 }

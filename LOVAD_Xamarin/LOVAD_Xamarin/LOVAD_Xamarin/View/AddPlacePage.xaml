@@ -76,7 +76,7 @@
 
                     <StackLayout Orientation="Horizontal" Grid.Row="20"  Grid.Column="0" HorizontalOptions="Center">
                         <Button x:Name="btnCheckPlace"  Clicked="btnCheckPlace_Clicked" VerticalOptions="Center" HorizontalOptions="Center"  Text="Kiểm tra" IsEnabled="True"/>
-                        <Button x:Name="btnSave"  Clicked="btnSave_Clicked" VerticalOptions="Center" HorizontalOptions="Center"  Text="Lưu" IsEnabled="False"/>
+                        <Button x:Name="btnSave"  Clicked="btnSave_Clicked" VerticalOptions="Center" HorizontalOptions="Center"  Text="Lưu" IsEnabled="True"/>
                     </StackLayout>
                 </Grid>
             </Frame>

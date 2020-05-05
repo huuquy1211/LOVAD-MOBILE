@@ -1118,8 +1118,9 @@ namespace LOVAD_Xamarin.View
         public void LoadCustomerTypeList()
         {
             List<DataSearchModel> ListCustomerType = new List<DataSearchModel>();
-            ListCustomerType.Add(new DataSearchModel() { IdCustomerType = "-1", NameCustomerType = "Vé ngày" });
-            ListCustomerType.Add(new DataSearchModel() { IdCustomerType = "0", NameCustomerType = "Vãng lai" });
+            //ListCustomerType.Add(new DataSearchModel() { IdCustomerType = "-1", NameCustomerType = "Vé ngày" });
+            //ListCustomerType.Add(new DataSearchModel() { IdCustomerType = "0", NameCustomerType = "Vãng lai" });
+            ListCustomerType.Add(new DataSearchModel() { IdCustomerType = "-1", NameCustomerType = "Vãng lai" });
             ListCustomerType.Add(new DataSearchModel() { IdCustomerType = "1", NameCustomerType = "Khách hàng" });
             ListCustomerType.Add(new DataSearchModel() { IdCustomerType = "2", NameCustomerType = "Nhân viên" });
 

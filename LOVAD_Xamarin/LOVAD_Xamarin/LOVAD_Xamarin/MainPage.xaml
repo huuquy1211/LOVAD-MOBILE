@@ -47,8 +47,8 @@
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Text="Dịch vụ" FontAttributes="Italic" FontSize="Medium" TextColor="#658CD9" />
                         <!--LParking-->
-                        <Frame Grid.Row="1" HasShadow="True" OutlineColor="Aqua" CornerRadius="10" Margin="0,0,0,10">
-                            <Grid x:Name="grdLparking">
+                        <Frame x:Name="grdLparking" Grid.Row="1" HasShadow="True" OutlineColor="Aqua" CornerRadius="10" Margin="0,0,0,10">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
@@ -75,7 +75,7 @@
                             </Grid>
                         </Frame>
                         <!--Trạm Cân-->
-                        <Frame Grid.Row="2" HasShadow="True" OutlineColor="Aqua" CornerRadius="10" IsVisible="False">
+                        <Frame x:Name="grdTramCan" Grid.Row="2" HasShadow="True" OutlineColor="Aqua" CornerRadius="10" IsVisible="False">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>

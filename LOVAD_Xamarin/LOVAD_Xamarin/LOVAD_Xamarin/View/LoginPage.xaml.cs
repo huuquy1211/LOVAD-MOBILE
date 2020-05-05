@@ -253,47 +253,59 @@ namespace LOVAD_Xamarin.View
 
                 string url = "http://" + Global.Intance.SerIpAdress + ":" + Global.Intance.SerPortAPI + "/api/Login";
 
-                //HttpWebRequest webReq = (HttpWebRequest)HttpWebRequest.Create(url);
-                //webReq.Timeout = 10000;
+               
                 try
                 {
-                    //HttpWebResponse responseErr = (HttpWebResponse)webReq.GetResponse();
-
-                    HttpClient client = new HttpClient();
-                    string jsonData = JsonConvert.SerializeObject(loginModel);
-                    StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-                    HttpResponseMessage response = await client.PostAsync(url, content);
-                    string result = await response.Content.ReadAsStringAsync();
-
-                    HttpHeaders headers = response.Headers;// Lấy các Headers  trả về
-
-                    foreach (var header in headers)
+                    using (HttpClient client = new HttpClient())
                     {
-                        string key_header = header.Key;// Key, ví dụ: Cache-Control, Set-Cookie ...
-                        if (key_header.Contains("Set-Cookie"))
+                        client.Timeout = TimeSpan.FromSeconds(30);
+                        string jsonData = JsonConvert.SerializeObject(loginModel);
+                        StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                      
+                        HttpResponseMessage response = await client.PostAsync(url, content);
+                        string result = await response.Content.ReadAsStringAsync();
+
+                        HttpHeaders headers = response.Headers;// Lấy các Headers  trả về
+
+                        foreach (var header in headers)
                         {
-                            IEnumerable<string> value_header = header.Value;// Danh sách các giá trị cho header
-                            Global.Intance.Cookie = string.Join(",", value_header);
+                            string key_header = header.Key;// Key, ví dụ: Cache-Control, Set-Cookie ...
+                            if (key_header.Contains("Set-Cookie"))
+                            {
+                                IEnumerable<string> value_header = header.Value;// Danh sách các giá trị cho header
+                                Global.Intance.Cookie = string.Join(",", value_header);
+                            }
                         }
-                    }
 
-                    var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    var fileName = Path.Combine(documents, "cookie.txt");
-                    File.WriteAllText(fileName, Global.Intance.Cookie);
+                        var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                        var fileName = Path.Combine(documents, "cookie.txt");
+                        File.WriteAllText(fileName, Global.Intance.Cookie);
 
-                    var responseData = JsonConvert.DeserializeObject<RespondModel>(result);
-                    var message = responseData.Content;
-                    if (responseData.Result == true)
-                    {
-                        await Navigation.PushAsync(new MainPage(responseData.UserRespond));
-                        await PopupNavigation.Instance.PopAllAsync();
-                        DependencyService.Get<IMessage>().ShortTime(message[0].ToString());
-                    }
-                    else
-                    {
-                        await PopupNavigation.Instance.PopAllAsync();
-                        DependencyService.Get<IMessage>().LongTime(message[0].ToString());
+                        var responseData = JsonConvert.DeserializeObject<RespondModel>(result);
+                        var message = responseData.Content;
+                        if (responseData != null && responseData.Result == true && responseData.UserRespond != null)
+                        {
+                            if (responseData.UserRespond.Id != null)
+                            {
+                                await PopupNavigation.Instance.PopAllAsync();
+                                await Navigation.PushAsync(new MainPage(responseData.UserRespond));
+                                DependencyService.Get<IMessage>().ShortTime(message[0].ToString());
+                                return;
+                            }
+                            else
+                            {
+                                await PopupNavigation.Instance.PopAllAsync();
+                                var Err = "Không nết nối được máy chủ!";
+                                DependencyService.Get<IMessage>().LongTime(Err);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            await PopupNavigation.Instance.PopAllAsync();
+                            DependencyService.Get<IMessage>().LongTime(message[0].ToString());
+                            return;
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -308,8 +320,6 @@ namespace LOVAD_Xamarin.View
                 await PopupNavigation.Instance.PopAllAsync();
                 await DisplayAlert("Thông báo", "Vui lòng nhập đầy đủ thông tin!", "OK");
             }
-
-
         }
 
         private void btnShowPassWord_Clicked(object sender, EventArgs e)

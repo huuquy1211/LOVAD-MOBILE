@@ -129,7 +129,60 @@ namespace LOVAD_Xamarin.View
         #region [Hàm xử lý chung]
         private void btnSearch_Clicked(object sender, EventArgs e)
         {
-            GetDataLParkingReport();
+            PopupNavigation.Instance.PushAsync(new LoadingView("search"));
+            try
+            {
+                //Clear doanh thu trước khi search
+                TotalPrice = 0;
+                TotalIn = 0;
+                TotalOut = 0;
+
+                AddDataValues();
+                string url = "http://" + Global.Intance.SerIpAdressLParking + ":" + Global.Intance.SerPortAPILParking + "/api/load-day-statistic";
+                var result = SendHttpPostRequest(url, values, 180000);
+                if (result != null)
+                {
+                    var responseData = JsonConvert.DeserializeObject<DataReportLParkingModel>(result);
+                    if (responseData != null && responseData.data.Count > 0)
+                    {
+                        DataLParkingReport = new ObservableCollection<ValueReportLParkingModel>(responseData.data);
+
+                        foreach (var item in DataLParkingReport)
+                        {
+                            TotalPrice += item.TotalPrice;
+                            TotalIn += item.InCount;
+                            TotalOut += item.OutCount;
+                        }
+
+                        PopupNavigation.Instance.PopAllAsync();
+                        var message = "Tìm dữ liệu thành công!";
+                        DependencyService.Get<IMessage>().ShortTime(message);
+                    }
+                    else
+                    {
+                        PopupNavigation.Instance.PopAllAsync();
+                        DataLParkingReport = new ObservableCollection<ValueReportLParkingModel>();
+                        var message = "Dữ liệu rỗng!";
+                        DependencyService.Get<IMessage>().LongTime(message);
+                    }
+                }
+                else
+                {
+                    PopupNavigation.Instance.PopAllAsync();
+                    DataLParkingReport = new ObservableCollection<ValueReportLParkingModel>();
+                    var message = "Dữ liệu rỗng!";
+                    DependencyService.Get<IMessage>().LongTime(message);
+
+                }
+            }
+            catch (Exception)
+            {
+                PopupNavigation.Instance.PopAllAsync();
+                DataLParkingReport = new ObservableCollection<ValueReportLParkingModel>();
+                var message = "Không kết nối được máy chủ!";
+                DependencyService.Get<IMessage>().LongTime(message);
+            }
+
         }
         public void GetDataLParkingReport()
         {
@@ -159,12 +212,13 @@ namespace LOVAD_Xamarin.View
                         }
 
                         PopupNavigation.Instance.PopAllAsync();
-                        var message = "Load dữ liệu thành công!";
+                        var message = "Tìm dữ liệu thành công!";
                         DependencyService.Get<IMessage>().ShortTime(message);
                     }
                     else
                     {
                         PopupNavigation.Instance.PopAllAsync();
+                        DataLParkingReport = new ObservableCollection<ValueReportLParkingModel>();
                         var message = "Dữ liệu rỗng!";
                         DependencyService.Get<IMessage>().LongTime(message);
                     }
@@ -172,13 +226,16 @@ namespace LOVAD_Xamarin.View
                 else
                 {
                     PopupNavigation.Instance.PopAllAsync();
+                    DataLParkingReport = new ObservableCollection<ValueReportLParkingModel>();
                     var message = "Dữ liệu rỗng!";
                     DependencyService.Get<IMessage>().LongTime(message);
+
                 }
             }
             catch (Exception)
             {
                 PopupNavigation.Instance.PopAllAsync();
+                DataLParkingReport = new ObservableCollection<ValueReportLParkingModel>();
                 var message = "Không kết nối được máy chủ!";
                 DependencyService.Get<IMessage>().LongTime(message);
             }

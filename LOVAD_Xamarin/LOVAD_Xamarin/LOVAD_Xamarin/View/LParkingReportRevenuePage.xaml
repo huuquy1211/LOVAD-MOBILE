@@ -46,10 +46,10 @@
 
 
                         <Label Grid.Row="0" Grid.Column="0" Text="TỪ NGÀY" FontAttributes="Bold" TextColor="Black"/>
-                        <DatePicker x:Name="pkrStartDate" Grid.Row="1" Grid.Column="0"/>
+                        <DatePicker x:Name="pkrStartDate" Format="dd/MM/yyyy" Grid.Row="1" Grid.Column="0"/>
 
                         <Label Grid.Row="0" Grid.Column="1" Text="ĐẾN NGÀY" FontAttributes="Bold" TextColor="Black"/>
-                        <DatePicker x:Name="pkrEndDate" Grid.Row="1" Grid.Column="1"/>
+                        <DatePicker x:Name="pkrEndDate" Format="dd/MM/yyyy" Grid.Row="1" Grid.Column="1"/>
 
                         <Label Grid.Row="2" Grid.Column="0" Text="MÁY TRẠM" FontAttributes="Bold" TextColor="Black"/>
                         <Button Grid.Row="3" Grid.Column="0" x:Name="btnStationCodeList" Clicked="btnStationCodeList_Clicked" Text="--Chọn--" FontAttributes="Bold" TextColor="Red" BackgroundColor="White" BorderWidth="1" FontSize="Micro" BorderColor="Aqua"/>
@@ -71,13 +71,13 @@
                 </Frame>
                 <Grid Grid.Row="4" BackgroundColor="#117FAA" Margin="5">
                     <Label Grid.Row="0" Grid.ColumnSpan="2" Margin="0" Text="Tổng cộng" FontAttributes="Bold" FontSize="Large" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Label Grid.Row="1" Grid.Column="0" Margin="0" Text="Số lượng vào:" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
-                    <Label Grid.Row="2" Grid.Column="0" Margin="0" Text="Số lượng ra:" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
-                    <Label Grid.Row="3" Grid.Column="0" Margin="0" Text="Tổng tiền:" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+                    <Label Grid.Row="1" Grid.Column="0" Margin="5" Text="Số lượng vào:" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Row="2" Grid.Column="0" Margin="5" Text="Số lượng ra:" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Row="3" Grid.Column="0" Margin="5" Text="Tổng tiền:" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
 
-                    <Label x:Name="tblTotalIn" Grid.Row="1" Grid.Column="1" Margin="0" Text="{Binding TotalIn, StringFormat='{0:0,0}'}}" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Label x:Name="tblTotalOut" Grid.Row="2" Grid.Column="1" Margin="0" Text="{Binding TotalOut, StringFormat='{0:0,0}'}}" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Label x:Name="tblTotalPrice" Grid.Row="3" Grid.Column="1" Margin="0" Text="{Binding TotalPrice, StringFormat='{0:0,0}'}" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="tblTotalIn" Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding TotalIn, StringFormat='{0:0,0}'}" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+                    <Label x:Name="tblTotalOut" Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding TotalOut, StringFormat='{0:0,0}'}" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
+                    <Label x:Name="tblTotalPrice" Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding TotalPrice, StringFormat='{0:0,0}'}" FontAttributes="Bold" FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
                 </Grid>
 
                 <Grid Grid.Row="5" Margin="5" BackgroundColor="White">
@@ -146,7 +146,7 @@
                                             <Label  Grid.Column="3" Margin="0" Text="{Binding CustomerType}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                             <Label  Grid.Column="4" Margin="0" Text="{Binding InCount}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                             <Label  Grid.Column="5" Margin="0" Text="{Binding OutCount}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                            <Label  Grid.Column="6" Margin="0" Text="{Binding TotalPrice}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                            <Label  Grid.Column="6" Margin="5" Text="{Binding TotalPrice, StringFormat='{0:0,0}'}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="End"/>
 
                                             <BoxView Grid.Column="0" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
                                             <BoxView Grid.Column="1" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>

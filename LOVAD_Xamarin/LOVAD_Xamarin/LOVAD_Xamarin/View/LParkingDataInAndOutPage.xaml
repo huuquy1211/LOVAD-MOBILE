@@ -61,10 +61,10 @@
 
 
                         <Label Grid.Row="0" Grid.Column="0" Text="Từ" FontAttributes="Bold" TextColor="Black"/>
-                        <DatePicker x:Name="pkrStartDate" Date="{Binding startDate}" Grid.Row="1" Grid.Column="0"/>
+                        <DatePicker x:Name="pkrStartDate" Format="dd/MM/yyyy" Date="{Binding startDate}" Grid.Row="1" Grid.Column="0"/>
 
                         <Label Grid.Row="0" Grid.Column="1" Text="Đến" FontAttributes="Bold" TextColor="Black"/>
-                        <DatePicker x:Name="pkrEndDate" Date="{Binding endDate}" Grid.Row="1" Grid.Column="1"/>
+                        <DatePicker x:Name="pkrEndDate" Format="dd/MM/yyyy" Date="{Binding endDate}" Grid.Row="1" Grid.Column="1"/>
 
                         <Label Grid.Row="2" Grid.Column="0" Text="Loại đối tượng" FontAttributes="Bold" TextColor="Black"/>
                         <Button Grid.Row="3" Grid.Column="0" x:Name="btnSelectInVehicleTypeList" Clicked="btnSelectInVehicleTypeList_Clicked" FontAttributes="Bold" TextColor="Red" BackgroundColor="White" BorderWidth="1" FontSize="Micro" BorderColor="Aqua"/>
@@ -101,9 +101,9 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="0" Text="Page size" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Label Grid.Column="0" Text="Kích thước trang" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-                            <Picker x:Name="pkrPageSize" Grid.Column="1" SelectedItem="{Binding PageSize}" SelectedIndexChanged="pkrPageSize_SelectedIndexChanged" Title="Page Size" HorizontalOptions="Fill" TitleColor="Red">
+                            <Picker x:Name="pkrPageSize" Grid.Column="1" SelectedItem="{Binding PageSize}" SelectedIndexChanged="pkrPageSize_SelectedIndexChanged" Title="Kích thước trang" HorizontalOptions="Fill" TitleColor="Red">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>10</x:String>
@@ -285,7 +285,7 @@
                                             <Label Grid.Column="8" Margin="0" Text="{Binding TimeOut}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                             <Label Grid.Column="9" Margin="0" Text="{Binding ParkingTime}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                             <Label Grid.Column="10" Margin="0" Text="{Binding CardType}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                            <Label Grid.Column="11" Margin="0" Text="{Binding Price}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                            <Label Grid.Column="11" Margin="0" Text="{Binding Price, StringFormat='{0:0,0}'}"  FontSize="Default" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
 
                                             <BoxView Grid.Column="0" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
                                             <BoxView Grid.Column="1" BackgroundColor="Black" WidthRequest="1" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>

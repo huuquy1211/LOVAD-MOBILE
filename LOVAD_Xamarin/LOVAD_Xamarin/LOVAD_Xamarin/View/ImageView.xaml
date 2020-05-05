@@ -16,12 +16,20 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <!--<RowDefinition Height="auto"/>-->
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
-            <Image x:Name="imgShowView" Grid.Row="0" Source="NoImage.png" Aspect="Fill"/>
-            <ActivityIndicator x:Name="frmLoading" AutomationId="" IsRunning="False" VerticalOptions="Center" HorizontalOptions="Center" Color="Aqua"/>
+        <Image x:Name="imgShowView" Grid.Row="1" Source="NoImage.png" Aspect="Fill">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="imgShowView_Tapped"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <Button x:Name="btnCancel" HorizontalOptions="End" VerticalOptions="Start" Grid.Row="0" BackgroundColor="Transparent" Margin="5" Clicked="btnCancel_Clicked">
+            <Button.Image>
+                <OnPlatform x:TypeArguments="FileImageSource" Android="cancel.png" iOS="cancel.png"/>
+            </Button.Image>
+        </Button>
+            <!--<ActivityIndicator x:Name="frmLoading" AutomationId="" IsRunning="False" VerticalOptions="Center" HorizontalOptions="Center" Color="Aqua"/>-->
         </Grid>
 
 </pages:PopupPage>

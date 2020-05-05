@@ -78,22 +78,32 @@ namespace LOVAD_Xamarin
                 //var message = responseData.Content;
                 if (responseData == 1)
                 {
-                    grdAccount.IsVisible = false;
+                    grdUserAccount.IsVisible = true;
+                    grdLparking.IsVisible = true;
+                    grdTramCan.IsVisible = true;
+                    grdAccount.IsVisible = true;
                     grdService.IsVisible = true;
-                    grdPlace.IsVisible = false;
-                    grdUserAccount.IsVisible = false;
+                    grdPlace.IsVisible = true;
                 }
                 else if (responseData == 2)
                 {
                     grdUserAccount.IsVisible = true;
                     grdAccount.IsVisible = true;
                     grdService.IsVisible = true;
+                    grdLparking.IsVisible = true;
+                    grdTramCan.IsVisible = true;
                     grdPlace.IsVisible = true;
                 }
                 else if (responseData == 3)
                 {
-                    grdUserAccount.IsVisible = true;
+                    grdAccount.IsVisible = false;
                     grdService.IsVisible = true;
+                    grdLparking.IsVisible = true;
+                    grdTramCan.IsVisible = false;
+
+                    grdPlace.IsVisible = false;
+                    grdUserAccount.IsVisible = true;
+                    btnAccount.IsEnabled = false;
                 }
                 else if (responseData == 4)
                 {
@@ -117,11 +127,11 @@ namespace LOVAD_Xamarin
 
         private async void TaiKhoanClick(object sender, EventArgs e)
         {
-            await PopupNavigation.Instance.PushAsync(new LoadingView("search"));
-            await PopupNavigation.Instance.PopAsync();
-            var Err = "Không truy cập vào chức năng này!";
-            DependencyService.Get<IMessage>().LongTime(Err);
-            return;
+            //await PopupNavigation.Instance.PushAsync(new LoadingView("search"));
+            //await PopupNavigation.Instance.PopAsync();
+            //var Err = "Không truy cập vào chức năng này!";
+            //DependencyService.Get<IMessage>().LongTime(Err);
+            //return;
             await PopupNavigation.Instance.PushAsync(new LoadingView("search"));
             await Navigation.PushAsync(new AccountPage(userProfileModel));
             await PopupNavigation.Instance.PopAsync();
@@ -129,11 +139,11 @@ namespace LOVAD_Xamarin
 
         private async void PlaceClick(object sender, EventArgs e)
         {
-            await PopupNavigation.Instance.PushAsync(new LoadingView("search"));
-            await PopupNavigation.Instance.PopAsync();
-            var Err = "Không truy cập vào chức năng này!";
-            DependencyService.Get<IMessage>().LongTime(Err);
-            return;
+            //await PopupNavigation.Instance.PushAsync(new LoadingView("search"));
+            //await PopupNavigation.Instance.PopAsync();
+            //var Err = "Không truy cập vào chức năng này!";
+            //DependencyService.Get<IMessage>().LongTime(Err);
+            //return;
             await PopupNavigation.Instance.PushAsync(new LoadingView("search"));
             await Navigation.PushAsync(new PlacePage(userProfileModel));
             await PopupNavigation.Instance.PopAsync();
@@ -150,11 +160,12 @@ namespace LOVAD_Xamarin
         private async void TramCanClick(object sender, EventArgs e)
         {
 
+            //await PopupNavigation.Instance.PushAsync(new LoadingView("search"));
+            //await PopupNavigation.Instance.PopAsync();
+            //var Err = "Không truy cập vào chức năng này!";
+            //DependencyService.Get<IMessage>().LongTime(Err);
+            //return;
             await PopupNavigation.Instance.PushAsync(new LoadingView("search"));
-            await PopupNavigation.Instance.PopAsync();
-            var Err = "Không truy cập vào chức năng này!";
-            DependencyService.Get<IMessage>().LongTime(Err);
-            return;
             bool IsMasterDetail = false;
             await Navigation.PushAsync(new PlaceTramCanPage(userProfileModel, IsMasterDetail));
             await PopupNavigation.Instance.PopAsync();
@@ -162,11 +173,11 @@ namespace LOVAD_Xamarin
 
         private async void btnAccount_Clicked(object sender, EventArgs e)
         {
-            await PopupNavigation.Instance.PushAsync(new LoadingView("search"));
-            await PopupNavigation.Instance.PopAsync();
-            var Err = "Không truy cập vào chức năng này!";
-            DependencyService.Get<IMessage>().LongTime(Err);
-            return;
+            //await PopupNavigation.Instance.PushAsync(new LoadingView("search"));
+            //await PopupNavigation.Instance.PopAsync();
+            //var Err = "Không truy cập vào chức năng này!";
+            //DependencyService.Get<IMessage>().LongTime(Err);
+            //return;
             await PopupNavigation.Instance.PushAsync(new LoadingView("search"));
             string url = "http://" + Global.Intance.SerIpAdress + ":" + Global.Intance.SerPortAPI + "/api/GetUserInf";
 
@@ -200,7 +211,7 @@ namespace LOVAD_Xamarin
             }
             catch (Exception ex)
             {
-                //var Err = "Không nết nối được máy chủ";
+                var Err = "Không nết nối được máy chủ";
                 DependencyService.Get<IMessage>().LongTime(Err);
             }
             await PopupNavigation.Instance.PopAsync();

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,24 +42,9 @@ namespace LOVAD_Xamarin.View
             lblNamePlace.Text = PlaceSelect.Name;
             NavigationPage.SetHasNavigationBar(this, false);
 
-            menu = new List<MenuItems>();
-
-            menu.Add(new MenuItems { OptionName = "Dữ liệu vào ra", OptionIndex = 1 });
-            //menu.Add(new MenuItems { OptionName = "Danh sách đen", OptionIndex = 2 });
-            menu.Add(new MenuItems { OptionName = "Báo cáo doanh thu", OptionIndex = 3 });
-            //menu.Add(new MenuItems { OptionName = "Khách hàng", OptionIndex = 4 });
-            //menu.Add(new MenuItems { OptionName = "Danh sách thẻ mất", OptionIndex = 5 });
-            menu.Add(new MenuItems { OptionName = "Quay lại danh sách cơ sở", OptionIndex = 6 });
-            navigationList.ItemsSource = menu;
-
-            Detail = new NavigationPage(new LParkingDataInAndOutPage());
+            CheckUserLogin();//Kiểm tra quyền
         }
 
-        //protected override void OnAppearing()
-        //{
-
-           
-        //}
         private void Item_Tapped(object sender, ItemTappedEventArgs e)
         {
             PopupNavigation.Instance.PushAsync(new LoadingView("search"));
@@ -76,44 +62,29 @@ namespace LOVAD_Xamarin.View
                         break;
                     case 2:
                         {
-                            string Err = "Chức năng sớm truy cập!";
-                            DependencyService.Get<IMessage>().LongTime(Err);
-                            IsPresented = false;
-                            PopupNavigation.Instance.PopAllAsync();
-                            return;
+                            //string Err = "Chức năng sớm truy cập!";
+                            //DependencyService.Get<IMessage>().LongTime(Err);
+                            //IsPresented = false;
+                            //PopupNavigation.Instance.PopAllAsync();
+                            //return;
                             Detail = new NavigationPage(new LParkingBlackListPage());
                             IsPresented = false;
                         }
                         break;
                     case 3:
                         {
-                            //string Err = "Chức năng sớm truy cập!";
-                            //DependencyService.Get<IMessage>().LongTime(Err);
-                            //IsPresented = false;
-                            //PopupNavigation.Instance.PopAllAsync();
-                            //return;
                             Detail = new NavigationPage(new LParkingReportRevenuePage());
                             IsPresented = false;
                         }
                         break;
                     case 4:
                         {
-                            string Err = "Chức năng sớm truy cập!";
-                            DependencyService.Get<IMessage>().LongTime(Err);
-                            IsPresented = false;
-                            PopupNavigation.Instance.PopAllAsync();
-                            return;
                             Detail = new NavigationPage(new LParkingCustomerPage());
                             IsPresented = false;
                         }
                         break;
                     case 5:
                         {
-                            string Err = "Chức năng sớm truy cập!";
-                            DependencyService.Get<IMessage>().LongTime(Err);
-                            IsPresented = false;
-                            PopupNavigation.Instance.PopAllAsync();
-                            return;
                             Detail = new NavigationPage(new LParkingListLostCardsPage());
                             IsPresented = false;
                            
@@ -121,10 +92,8 @@ namespace LOVAD_Xamarin.View
                         break;
                     case 6:
                         {
-                           
                             Detail = new NavigationPage(new PlaceLParkingPage(_UserProfileModel, true));
                             IsPresented = false;
-                           
                         }
                         break;
                 }
@@ -135,6 +104,81 @@ namespace LOVAD_Xamarin.View
                 PopupNavigation.Instance.PopAllAsync();
             }
             PopupNavigation.Instance.PopAllAsync();
+        }
+
+        public async void CheckUserLogin()
+        {
+            string url = "http://" + Global.Intance.SerIpAdress + ":" + Global.Intance.SerPortAPI + "/api/GetRole?UserName=" + _UserProfileModel.UserName;
+            try
+            {
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(url);
+                string result = await response.Content.ReadAsStringAsync();
+                var responseData = Int32.Parse(result);
+
+                //var message = responseData.Content;
+                if (responseData == 1)
+                {
+                    menu = new List<MenuItems>();
+
+                    menu.Add(new MenuItems { OptionName = "Dữ liệu vào ra", OptionIndex = 1 });
+                    menu.Add(new MenuItems { OptionName = "Danh sách đen", OptionIndex = 2 });
+                    menu.Add(new MenuItems { OptionName = "Báo cáo doanh thu", OptionIndex = 3 });
+                    menu.Add(new MenuItems { OptionName = "Khách hàng", OptionIndex = 4 });
+                    menu.Add(new MenuItems { OptionName = "Danh sách thẻ mất", OptionIndex = 5 });
+                    menu.Add(new MenuItems { OptionName = "Quay lại danh sách cơ sở", OptionIndex = 6 });
+                    navigationList.ItemsSource = menu;
+                    Detail = new NavigationPage(new LParkingDataInAndOutPage());
+                }
+                else if (responseData == 2)
+                {
+                    menu = new List<MenuItems>();
+
+                    menu.Add(new MenuItems { OptionName = "Dữ liệu vào ra", OptionIndex = 1 });
+                    menu.Add(new MenuItems { OptionName = "Danh sách đen", OptionIndex = 2 });
+                    menu.Add(new MenuItems { OptionName = "Báo cáo doanh thu", OptionIndex = 3 });
+                    menu.Add(new MenuItems { OptionName = "Khách hàng", OptionIndex = 4 });
+                    menu.Add(new MenuItems { OptionName = "Danh sách thẻ mất", OptionIndex = 5 });
+                    menu.Add(new MenuItems { OptionName = "Quay lại danh sách cơ sở", OptionIndex = 6 });
+                    navigationList.ItemsSource = menu;
+                    Detail = new NavigationPage(new LParkingDataInAndOutPage());
+                }
+                else if (responseData == 3)
+                {
+                    menu = new List<MenuItems>();
+
+                    menu.Add(new MenuItems { OptionName = "Dữ liệu vào ra", OptionIndex = 1 });
+                    //menu.Add(new MenuItems { OptionName = "Danh sách đen", OptionIndex = 2 });
+                    menu.Add(new MenuItems { OptionName = "Báo cáo doanh thu", OptionIndex = 3 });
+                    //menu.Add(new MenuItems { OptionName = "Khách hàng", OptionIndex = 4 });
+                    //menu.Add(new MenuItems { OptionName = "Danh sách thẻ mất", OptionIndex = 5 });
+                    menu.Add(new MenuItems { OptionName = "Quay lại danh sách cơ sở", OptionIndex = 6 });
+                    navigationList.ItemsSource = menu;
+                    Detail = new NavigationPage(new LParkingDataInAndOutPage());
+
+                }
+                else if (responseData == 4)
+                {
+                    menu = new List<MenuItems>();
+                    menu.Add(new MenuItems { OptionName = "Quay lại danh sách cơ sở", OptionIndex = 6 });
+                    navigationList.ItemsSource = menu;
+                    return;
+                    //Detail = new NavigationPage(new LParkingDataInAndOutPage());
+                }
+                else if (responseData == 5)
+                {
+                    await DisplayAlert("Thông báo", "Không tìm thấy tài khoản!", "OK");
+                }
+                else if (responseData == 6)
+                {
+                    await DisplayAlert("Thông báo", "Tài khoản này không được quyền thao tác trên ứng dụng!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                var Err = "Không nết nối được máy chủ";
+                DependencyService.Get<IMessage>().LongTime(Err);
+            }
         }
     }
     public class MenuItems
